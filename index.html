@@ -1,0 +1,322 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DEMO • Hotel Intermedia</title>
+  <meta name="description" content="Página de muestra (nivel intermedio) para hotel/posada. DEMO sin datos reales." />
+  <!-- Tailwind Play CDN (para demos). Para producción, compilar Tailwind con build. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"}
+    .ribbon-demo{position:fixed;left:-60px;top:22px;background:#334155;color:#fff;padding:8px 80px;transform:rotate(-35deg);z-index:50;font-weight:700;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+  </style>
+  <script>
+    /* ================================
+       ⚙️ VARIABLES DE DEMO A PERSONALIZAR
+       - Ajustá BRAND_NAME, WHATSAPP_NUMBER, ADDRESS cuando clones la demo.
+       ================================ */
+    const BRAND_NAME = 'Hotel Demo Intermedia';
+    const WHATSAPP_NUMBER = '5493764000000'; // 549 + área + número (sin + ni 0)
+    const ADDRESS = 'Calle 123, Ciudad, Misiones';
+
+    function applyBranding(){
+      document.querySelectorAll('[data-brand]').forEach(el=> el.textContent = BRAND_NAME);
+      document.querySelectorAll('[data-address]').forEach(el=> el.textContent = ADDRESS);
+    }
+
+    function setRoom(room){
+      const r = document.getElementById('room');
+      if(r) r.value = room;
+      document.getElementById('reserva').scrollIntoView({behavior:'smooth'});
+    }
+
+    function sendWhatsAppReserva(e){
+      e.preventDefault();
+      const room = document.getElementById('room').value || 'a confirmar';
+      const checkin = document.getElementById('checkin').value || 'sin fecha';
+      const checkout = document.getElementById('checkout').value || 'sin fecha';
+      const guests = document.getElementById('guests').value || '2';
+      const msg = `Hola! Quiero reservar en ${BRAND_NAME}.%0A` +
+                  `Habitación: ${room}%0A` +
+                  `Check-in: ${checkin}%0A` +
+                  `Check-out: ${checkout}%0A` +
+                  `Huéspedes: ${guests}%0A` +
+                  `¿Hay disponibilidad?`;
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+      window.open(url, '_blank');
+    }
+
+    function sendWhatsAppContacto(e){
+      e.preventDefault();
+      const nombre = document.getElementById('c_name').value || '';
+      const email = document.getElementById('c_email').value || '';
+      const mensaje = document.getElementById('c_msg').value || '';
+      const body = `Hola! Soy ${nombre}.%0AEmail: ${email}%0AConsulta: ${mensaje}`;
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${body}`;
+      window.open(url, '_blank');
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      applyBranding();
+      document.getElementById('year').textContent = new Date().getFullYear();
+    });
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <!-- CINTA DEMO -->
+  <div class="ribbon-demo">DEMO • Contenido ilustrativo</div>
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-40 backdrop-blur bg-white/80 border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-emerald-600 grid place-content-center text-white font-extrabold" aria-hidden>H</div>
+        <span class="font-extrabold tracking-tight"><span data-brand></span> • DEMO Intermedia</span>
+      </div>
+      <button class="sm:hidden px-3 py-2 rounded-lg border border-slate-200" onclick="document.getElementById('menu').classList.toggle('hidden')">Menu</button>
+      <div id="menu" class="hidden sm:flex items-center gap-4 text-sm">
+        <a href="#habitaciones" class="hover:underline">Habitaciones</a>
+        <a href="#servicios" class="hover:underline">Servicios</a>
+        <a href="#galeria" class="hover:underline">Galería</a>
+        <a href="#atracciones" class="hover:underline">Atracciones</a>
+        <a href="#faq" class="hover:underline">FAQs</a>
+        <a href="#contacto" class="hover:underline">Contacto</a>
+        <a href="#reserva" class="px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Reservar</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO (full-bleed) -->
+  <header class="relative w-full">
+    <div class="relative w-full h-[68vh] md:h-[80vh]">
+      <!-- 👇 Reemplazá este bloque por una foto real: podés usar style=\"background-image:url('assets/hero.jpg')\" o un <img/> -->
+      <div class="absolute inset-0">
+        <div class="w-full h-full bg-slate-900 grid place-content-center text-white/80">
+          <div class="text-center">
+            <div class="text-6xl mb-3" aria-hidden>🏨</div>
+            <p>HERO full‑width — reemplazá por tu imagen/slider</p>
+          </div>
+        </div>
+      </div>
+      <!-- Overlay para contraste sobre la foto -->
+      <div class="absolute inset-0 bg-black/35"></div>
+
+      <!-- Contenido del hero -->
+      <div class="relative max-w-6xl mx-auto h-full px-4 flex items-center">
+        <div class="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
+          <p class="text-xs inline-block px-2 py-1 rounded-lg border border-white/40 bg-white/10">Plantilla de muestra</p>
+          <h1 class="mt-3 text-3xl md:text-5xl font-extrabold leading-tight">
+            Tu estadía en <span class="text-emerald-200" data-brand></span> — simple, clara y lista para reservar
+          </h1>
+          <p class="mt-4 text-lg text-white/90 max-w-2xl">Nivel intermedio: más detalle que la versión esencial. Incluye habitaciones ampliadas, servicios, galería y atracciones cercanas.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#habitaciones" class="px-5 py-3 rounded-xl border border-white/60 bg-white/10 hover:bg-white/20">Ver habitaciones</a>
+            <a href="#reserva" class="px-5 py-3 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Reservar por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HABITACIONES (DETALLADAS) --> (DETALLADAS) -->
+  <section id="habitaciones" class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Habitaciones</h2>
+    <p class="mt-2 text-slate-700">Detalle con equipamiento y precio orientativo. Duplicá o quitá tarjetas según necesidad.</p>
+    <div class="mt-6 grid md:grid-cols-3 gap-4">
+      <!-- Room Card -->
+      <article class="rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm">
+        <div class="aspect-video bg-slate-100 grid place-content-center text-slate-500" role="img" aria-label="Foto habitación Standard">Foto Standard</div>
+        <div class="p-4">
+          <h3 class="font-bold">Standard</h3>
+          <ul class="mt-1 text-sm text-slate-600 list-disc list-inside">
+            <li>Cama queen, aire, TV, wifi</li>
+            <li>Desayuno incluido</li>
+            <li>Baño privado</li>
+          </ul>
+          <div class="mt-3 flex items-center justify-between">
+            <span class="text-sm text-emerald-700">Desde $XX.XXX</span>
+            <button onclick="setRoom('Standard')" class="text-sm underline">Reservar</button>
+          </div>
+        </div>
+      </article>
+      <!-- Room Card -->
+      <article class="rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm">
+        <div class="aspect-video bg-slate-100 grid place-content-center text-slate-500" role="img" aria-label="Foto habitación Superior">Foto Superior</div>
+        <div class="p-4">
+          <h3 class="font-bold">Superior</h3>
+          <ul class="mt-1 text-sm text-slate-600 list-disc list-inside">
+            <li>Vista al jardín</li>
+            <li>Frigobar, Smart TV</li>
+            <li>Box spring</li>
+          </ul>
+          <div class="mt-3 flex items-center justify-between">
+            <span class="text-sm text-emerald-700">Desde $XX.XXX</span>
+            <button onclick="setRoom('Superior')" class="text-sm underline">Reservar</button>
+          </div>
+        </div>
+      </article>
+      <!-- Room Card -->
+      <article class="rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm">
+        <div class="aspect-video bg-slate-100 grid place-content-center text-slate-500" role="img" aria-label="Foto habitación Suite">Foto Suite</div>
+        <div class="p-4">
+          <h3 class="font-bold">Suite</h3>
+          <ul class="mt-1 text-sm text-slate-600 list-disc list-inside">
+            <li>Balcón privado</li>
+            <li>Hidromasaje</li>
+            <li>Set de amenities premium</li>
+          </ul>
+          <div class="mt-3 flex items-center justify-between">
+            <span class="text-sm text-emerald-700">Desde $XX.XXX</span>
+            <button onclick="setRoom('Suite')" class="text-sm underline">Reservar</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SERVICIOS & AMENITIES -->
+  <section id="servicios" class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Servicios & Amenities</h2>
+    <p class="mt-2 text-slate-700">Mostrá lo que los huéspedes valoran. Podés sumar o quitar ítems fácilmente.</p>
+    <div class="mt-6 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>🍽️</span><p class="font-bold mt-1">Desayuno regional</p><p class="text-sm text-slate-600">Opciones sin TACC y vegetarianas.</p></div>
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>🏊‍♂️</span><p class="font-bold mt-1">Piscina</p><p class="text-sm text-slate-600">Solárium y toallas incluidas.</p></div>
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>🚗</span><p class="font-bold mt-1">Estacionamiento</p><p class="text-sm text-slate-600">Cochera cubierta sujeta a disponibilidad.</p></div>
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>📶</span><p class="font-bold mt-1">Wi‑Fi de alta velocidad</p><p class="text-sm text-slate-600">Ideal para trabajo remoto.</p></div>
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>🧺</span><p class="font-bold mt-1">Lavandería</p><p class="text-sm text-slate-600">Servicio con cargo.</p></div>
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>🐾</span><p class="font-bold mt-1">Pet‑friendly</p><p class="text-sm text-slate-600">Consultar reglas y cupos.</p></div>
+    </div>
+  </section>
+
+  <!-- GALERÍA -->
+  <section id="galeria" class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Galería</h2>
+    <p class="mt-2 text-slate-700">Reemplazá por tus fotos (10–15 recomendado).</p>
+    <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
+      <!-- 12 placeholders -->
+      ${Array.from({length:12}).map((_,i)=>`<div class='aspect-square bg-slate-100 grid place-content-center text-slate-500'>Foto ${i+1}</div>`).join('')}
+    </div>
+  </section>
+
+  <!-- ATRACCIONES CERCANAS -->
+  <section id="atracciones" class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Atracciones cercanas</h2>
+    <p class="mt-2 text-slate-700">Mostrá lo mejor de tu zona con tiempos estimados.</p>
+    <div class="mt-6 grid md:grid-cols-2 gap-4">
+      <div class="rounded-2xl border border-slate-200 bg-white p-4">
+        <ul class="space-y-2 text-sm">
+          <li>🗺️ Centro histórico — 8 min</li>
+          <li>🌳 Parque / Cataratas — 25 min</li>
+          <li>🍽️ Zona gastronómica — 5 min</li>
+          <li>🛍️ Paseo de compras — 12 min</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-slate-200 bg-white p-4">
+        <div class="aspect-[16/9] bg-slate-100 grid place-content-center text-slate-500">Mapa / Embed (DEMO)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Testimonios</h2>
+    <div class="mt-6 grid md:grid-cols-3 gap-4">
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">María</p><p class="text-sm text-slate-600 mt-1">“Muy cómodo y limpio. Volveríamos sin dudar.”</p></div>
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">Sergio</p><p class="text-sm text-slate-600 mt-1">“Excelente atención y desayuno riquísimo.”</p></div>
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">Ana</p><p class="text-sm text-slate-600 mt-1">“La ubicación nos permitió hacer todo caminando.”</p></div>
+    </div>
+  </section>
+
+  <!-- RESERVA RÁPIDA -->
+  <section id="reserva" class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Reserva rápida</h2>
+    <p class="mt-2 text-slate-700">Completá fechas y huéspedes. El mensaje se abrirá en WhatsApp con los datos cargados.</p>
+
+    <form onsubmit="sendWhatsAppReserva(event)" class="mt-6 grid md:grid-cols-6 gap-3 p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
+      <div class="md:col-span-2">
+        <label for="checkin" class="text-sm text-slate-600">Check‑in</label>
+        <input id="checkin" type="date" class="mt-1 w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-300" />
+      </div>
+      <div class="md:col-span-2">
+        <label for="checkout" class="text-sm text-slate-600">Check‑out</label>
+        <input id="checkout" type="date" class="mt-1 w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-300" />
+      </div>
+      <div>
+        <label for="guests" class="text-sm text-slate-600">Huéspedes</label>
+        <input id="guests" type="number" min="1" value="2" class="mt-1 w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-300" />
+      </div>
+      <div class="hidden">
+        <label for="room" class="text-sm">Habitación</label>
+        <input id="room" type="text" />
+      </div>
+      <div class="flex items-end">
+        <button class="w-full px-4 py-3 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Enviar por WhatsApp</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Preguntas frecuentes</h2>
+    <div class="mt-6 grid md:grid-cols-2 gap-4">
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">¿Check‑in y check‑out?</p><p class="text-sm text-slate-600 mt-1">Check‑in 14:00 • Check‑out 10:00 (DEMO).</p></div>
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">¿Política de cancelación?</p><p class="text-sm text-slate-600 mt-1">Cancelación flexible (consultar condiciones).</p></div>
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">¿Estacionamiento?</p><p class="text-sm text-slate-600 mt-1">Incluido, sujeto a disponibilidad.</p></div>
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">¿Aceptan mascotas?</p><p class="text-sm text-slate-600 mt-1">Sí, con costo adicional (DEMO).</p></div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Contacto</h2>
+    <p class="mt-2 text-slate-700">Escribinos o hablá directo por WhatsApp.</p>
+    <div class="mt-6 grid md:grid-cols-3 gap-4">
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm md:col-span-2">
+        <form onsubmit="sendWhatsAppContacto(event)" class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <label for="c_name" class="text-sm text-slate-600">Nombre</label>
+            <input id="c_name" type="text" class="mt-1 w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-300" />
+          </div>
+          <div>
+            <label for="c_email" class="text-sm text-slate-600">Email</label>
+            <input id="c_email" type="email" class="mt-1 w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-300" />
+          </div>
+          <div class="sm:col-span-2">
+            <label for="c_msg" class="text-sm text-slate-600">Mensaje</label>
+            <textarea id="c_msg" rows="4" class="mt-1 w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-300"></textarea>
+          </div>
+          <div class="sm:col-span-2 flex gap-3">
+            <button class="px-5 py-3 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Enviar por WhatsApp</button>
+            <a class="px-5 py-3 rounded-xl border border-slate-200" href="mailto:info@demo.com">Enviar por Email</a>
+          </div>
+        </form>
+      </div>
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
+        <p class="font-semibold" data-brand></p>
+        <p class="text-sm text-slate-600" data-address></p>
+        <p class="text-sm text-slate-600 mt-1">WhatsApp: +<span id="wa_display">{WHATSAPP}</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="mt-10 border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-600">
+      <p>© <span id="year"></span> <span data-brand></span>. DEMO para uso comercial ilustrativo.</p>
+      <div class="flex items-center gap-4">
+        <a class="underline" href="#">Política de privacidad</a>
+        <a class="underline" href="#">Términos</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mostrar número en el panel de contacto
+    document.getElementById('wa_display').textContent = WHATSAPP_NUMBER;
+  </script>
+</body>
+</html>
