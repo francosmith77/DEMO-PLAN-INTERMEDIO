@@ -1,20 +1,21 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DEMO • Hotel Intermedia</title>
   <meta name="description" content="Página de muestra (nivel intermedio) para hotel/posada. DEMO sin datos reales." />
-  <!-- Tailwind Play CDN (para demos). Para producción, compilar Tailwind con build. -->
+  <!-- Tailwind CDN para demo. En producción, compilar Tailwind. -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"}
+    body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial}
     .ribbon-demo{position:fixed;left:-60px;top:22px;background:#334155;color:#fff;padding:8px 80px;transform:rotate(-35deg);z-index:50;font-weight:700;box-shadow:0 6px 16px rgba(0,0,0,.2)}
   </style>
   <script>
+    /* Variables de demo (editables) */
     const BRAND_NAME = 'Hotel Demo Intermedia';
     const WHATSAPP_NUMBER = '5493764000000'; // 549 + área + número (sin + ni 0)
     const ADDRESS = 'Calle 123, Ciudad, Misiones';
@@ -23,13 +24,11 @@
       document.querySelectorAll('[data-brand]').forEach(el=> el.textContent = BRAND_NAME);
       document.querySelectorAll('[data-address]').forEach(el=> el.textContent = ADDRESS);
     }
-
     function setRoom(room){
       const r = document.getElementById('room');
       if(r) r.value = room;
       document.getElementById('reserva').scrollIntoView({behavior:'smooth'});
     }
-
     function sendWhatsAppReserva(e){
       e.preventDefault();
       const room = document.getElementById('room').value || 'a confirmar';
@@ -42,23 +41,20 @@
                   `Check-out: ${checkout}%0A` +
                   `Huéspedes: ${guests}%0A` +
                   `¿Hay disponibilidad?`;
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
-      window.open(url, '_blank');
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, '_blank');
     }
-
     function sendWhatsAppContacto(e){
       e.preventDefault();
       const nombre = document.getElementById('c_name').value || '';
       const email = document.getElementById('c_email').value || '';
       const mensaje = document.getElementById('c_msg').value || '';
       const body = `Hola! Soy ${nombre}.%0AEmail: ${email}%0AConsulta: ${mensaje}`;
-      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${body}`;
-      window.open(url, '_blank');
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${body}`, '_blank');
     }
-
     document.addEventListener('DOMContentLoaded', ()=>{
       applyBranding();
       document.getElementById('year').textContent = new Date().getFullYear();
+      document.getElementById('wa_display').textContent = WHATSAPP_NUMBER;
     });
   </script>
 </head>
@@ -86,24 +82,20 @@
     </div>
   </nav>
 
-  <!-- HERO (full-bleed) -->
+  <!-- HERO (imagen fija) -->
   <header class="relative w-full">
     <div class="relative w-full h-[68vh] md:h-[80vh]">
-      <!-- ✅ HERO con imagen real -->
       <div class="absolute inset-0">
         <img src="img/hero-hotel.png" alt="Fachada del alojamiento (imagen de muestra)" class="w-full h-full object-cover">
       </div>
-      <!-- Overlay para contraste sobre la foto -->
       <div class="absolute inset-0 bg-black/35"></div>
-
-      <!-- Contenido del hero -->
       <div class="relative max-w-6xl mx-auto h-full px-4 flex items-center">
         <div class="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
           <p class="text-xs inline-block px-2 py-1 rounded-lg border border-white/40 bg-white/10">Plantilla de muestra</p>
           <h1 class="mt-3 text-3xl md:text-5xl font-extrabold leading-tight">
             Tu estadía en <span class="text-emerald-200" data-brand></span> — simple, clara y lista para reservar
           </h1>
-          <p class="mt-4 text-lg text-white/90 max-w-2xl">Nivel intermedio: más detalle que la versión esencial. Incluye habitaciones ampliadas, servicios, galería y atracciones cercanas.</p>
+          <p class="mt-4 text-lg text-white/90 max-w-2xl">Nivel intermedio con habitaciones, servicios, galería y atracciones cercanas.</p>
           <div class="mt-6 flex flex-wrap gap-3">
             <a href="#habitaciones" class="px-5 py-3 rounded-xl border border-white/60 bg-white/10 hover:bg-white/20">Ver habitaciones</a>
             <a href="#reserva" class="px-5 py-3 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Reservar por WhatsApp</a>
@@ -113,7 +105,7 @@
     </div>
   </header>
 
-  <!-- HABITACIONES (DETALLADAS) -->
+  <!-- HABITACIONES -->
   <section id="habitaciones" class="max-w-6xl mx-auto px-4 py-12">
     <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Habitaciones</h2>
     <p class="mt-2 text-slate-700">Detalle con equipamiento y precio orientativo. Duplicá o quitá tarjetas según necesidad.</p>
@@ -169,10 +161,10 @@
     </div>
   </section>
 
-  <!-- SERVICIOS & AMENITIES -->
+  <!-- SERVICIOS -->
   <section id="servicios" class="max-w-6xl mx-auto px-4 py-12">
     <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Servicios & Amenities</h2>
-    <p class="mt-2 text-slate-700">Mostrá lo que los huéspedes valoran. Podés sumar o quitar ítems fácilmente.</p>
+    <p class="mt-2 text-slate-700">Mostrá lo que los huéspedes valoran.</p>
     <div class="mt-6 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
       <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>🍽️</span><p class="font-bold mt-1">Desayuno regional</p><p class="text-sm text-slate-600">Opciones sin TACC y vegetarianas.</p></div>
       <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>🏊‍♂️</span><p class="font-bold mt-1">Piscina</p><p class="text-sm text-slate-600">Solárium y toallas incluidas.</p></div>
@@ -183,100 +175,27 @@
     </div>
   </section>
 
-  <!-- GALERÍA (CARRUSEL FULL-WIDTH) -->
-  <section id="galeria" class="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-12 bg-white">
-    <style>
-      .no-scrollbar::-webkit-scrollbar{display:none}
-      .no-scrollbar{scrollbar-width:none}
-    </style>
+  <!-- GALERÍA (GRILLA, sin carrusel) -->
+  <section id="galeria" class="max-w-6xl mx-auto px-4 py-12">
+    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Fotografías</h2>
+    <p class="mt-2 text-slate-700">Imágenes de muestra. Tocá para ampliar (si integrás un lightbox).</p>
 
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Galería</h2>
-      <p class="mt-2 text-slate-700">Deslizá para ver más fotos (flechas, dots o swipe en móvil).</p>
+    <!-- Grilla responsiva tipo RIU: 1 col (xs), 2 col (sm), 3 col (md), 4 col (lg) -->
+    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      <figure class="rounded-xl overflow-hidden border border-slate-200 bg-white">
+        <img src="img/carrousel-hotel1.png" alt="Piscina exterior con solárium (imagen de muestra)" class="w-full h-full object-cover">
+      </figure>
+      <figure class="rounded-xl overflow-hidden border border-slate-200 bg-white">
+        <img src="img/carrousel-hotel2.png" alt="Área de fogón y livings exteriores (imagen de muestra)" class="w-full h-full object-cover">
+      </figure>
+      <figure class="rounded-xl overflow-hidden border border-slate-200 bg-white">
+        <img src="img/carrousel-hotel3.png" alt="Salón desayunador con ventanales (imagen de muestra)" class="w-full h-full object-cover">
+      </figure>
+      <!-- Si querés más columnas, podés repetir los 3 ítems o agregar nuevos archivos aquí -->
     </div>
-
-    <div class="relative mt-4">
-      <button class="gal-prev absolute left-3 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-slate-900/70 text-white border border-white/20 backdrop-blur hover:bg-slate-900/90" aria-label="Foto anterior">‹</button>
-      <button class="gal-next absolute right-3 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-slate-900/70 text-white border border-white/20 backdrop-blur hover:bg-slate-900/90" aria-label="Foto siguiente">›</button>
-
-      <div class="gal-track no-scrollbar snap-x snap-mandatory scroll-smooth overflow-x-auto w-full">
-        <figure class="min-w-full snap-start">
-          <img src="img/galeria-01.jpg" alt="Habitación y balcón con vista verde" class="w-full aspect-[16/9] object-cover bg-slate-100" fetchpriority="high" decoding="async">
-        </figure>
-        <figure class="min-w-full snap-start">
-          <img loading="lazy" src="img/galeria-02.jpg" alt="Área de piscina iluminada al atardecer" class="w-full aspect-[16/9] object-cover bg-slate-100">
-        </figure>
-        <figure class="min-w-full snap-start">
-          <img loading="lazy" src="img/galeria-03.jpg" alt="Lobby moderno con detalles en madera" class="w-full aspect-[16/9] object-cover bg-slate-100">
-        </figure>
-        <figure class="min-w-full snap-start">
-          <img loading="lazy" src="img/galeria-04.jpg" alt="Desayunador con grandes ventanales" class="w-full aspect-[16/9] object-cover bg-slate-100">
-        </figure>
-      </div>
-
-      <div class="gal-dots flex items-center justify-center gap-2 mt-3" aria-label="Paginación del carrusel"></div>
-    </div>
-
-    <script>
-      (function(){
-        const root = document.getElementById('galeria');
-        const track = root.querySelector('.gal-track');
-        const slides = [...track.querySelectorAll('figure')];
-        const prev = root.querySelector('.gal-prev');
-        const next = root.querySelector('.gal-next');
-        const dots = root.querySelector('.gal-dots');
-        let idx = 0;
-
-        function buildDots(){
-          dots.innerHTML = '';
-          slides.forEach((_, i)=>{
-            const b = document.createElement('button');
-            b.type = 'button';
-            b.className = 'w-2.5 h-2.5 rounded-full bg-slate-500/70 border border-slate-300';
-            b.setAttribute('aria-label', 'Ir a la foto ' + (i+1));
-            b.addEventListener('click', ()=>go(i));
-            dots.appendChild(b);
-          });
-        }
-        function updateDots(){
-          [...dots.children].forEach((el, i)=>{
-            el.setAttribute('aria-current', i===idx ? 'true':'false');
-            el.classList.toggle('bg-slate-200', i===idx);
-            el.classList.toggle('bg-slate-500/70', i!==idx);
-          });
-        }
-
-        function go(n){
-          idx = (n + slides.length) % slides.length;
-          const x = slides[idx].offsetLeft;
-          track.scrollTo({left:x, behavior:'smooth'});
-          updateDots();
-        }
-
-        prev.addEventListener('click', ()=>go(idx-1));
-        next.addEventListener('click', ()=>go(idx+1));
-
-        root.addEventListener('keydown', (e)=>{
-          if(e.key === 'ArrowLeft') go(idx-1);
-          if(e.key === 'ArrowRight') go(idx+1);
-        });
-        root.tabIndex = 0;
-
-        let startX = 0; let tracking = false;
-        track.addEventListener('pointerdown', e=>{ tracking=true; startX=e.clientX; track.setPointerCapture(e.pointerId); });
-        track.addEventListener('pointerup', e=>{
-          if(!tracking) return; tracking=false;
-          const dx = e.clientX - startX;
-          if(Math.abs(dx) > 40) (dx<0 ? go(idx+1) : go(idx-1));
-        });
-
-        buildDots(); updateDots(); go(0);
-        window.addEventListener('resize', ()=>go(idx));
-      })();
-    </script>
   </section>
 
-  <!-- ATRACCIONES CERCANAS -->
+  <!-- ATRACCIONES -->
   <section id="atracciones" class="max-w-6xl mx-auto px-4 py-12">
     <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Atracciones cercanas</h2>
     <p class="mt-2 text-slate-700">Mostrá lo mejor de tu zona con tiempos estimados.</p>
@@ -295,17 +214,7 @@
     </div>
   </section>
 
-  <!-- TESTIMONIOS -->
-  <section class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Testimonios</h2>
-    <div class="mt-6 grid md:grid-cols-3 gap-4">
-      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">María</p><p class="text-sm text-slate-600 mt-1">“Muy cómodo y limpio. Volveríamos sin dudar.”</p></div>
-      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">Sergio</p><p class="text-sm text-slate-600 mt-1">“Excelente atención y desayuno riquísimo.”</p></div>
-      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">Ana</p><p class="text-sm text-slate-600 mt-1">“La ubicación nos permitió hacer todo caminando.”</p></div>
-    </div>
-  </section>
-
-  <!-- RESERVA RÁPIDA -->
+  <!-- RESERVA -->
   <section id="reserva" class="max-w-6xl mx-auto px-4 py-12">
     <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Reserva rápida</h2>
     <p class="mt-2 text-slate-700">Completá fechas y huéspedes. El mensaje se abrirá en WhatsApp con los datos cargados.</p>
@@ -372,7 +281,7 @@
       <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <p class="font-semibold" data-brand></p>
         <p class="text-sm text-slate-600" data-address></p>
-        <p class="text-sm text-slate-600 mt-1">WhatsApp: +<span id="wa_display">{WHATSAPP}</span></p>
+        <p class="text-sm text-slate-600 mt-1">WhatsApp: +<span id="wa_display"></span></p>
       </div>
     </div>
   </section>
@@ -387,9 +296,5 @@
       </div>
     </div>
   </footer>
-
-  <script>
-    document.getElementById('wa_display').textContent = WHATSAPP_NUMBER;
-  </script>
 </body>
 </html>
