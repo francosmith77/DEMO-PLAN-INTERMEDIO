@@ -15,10 +15,6 @@
     .ribbon-demo{position:fixed;left:-60px;top:22px;background:#334155;color:#fff;padding:8px 80px;transform:rotate(-35deg);z-index:50;font-weight:700;box-shadow:0 6px 16px rgba(0,0,0,.2)}
   </style>
   <script>
-    /* ================================
-       ⚙️ VARIABLES DE DEMO A PERSONALIZAR
-       - Ajustá BRAND_NAME, WHATSAPP_NUMBER, ADDRESS cuando clones la demo.
-       ================================ */
     const BRAND_NAME = 'Hotel Demo Intermedia';
     const WHATSAPP_NUMBER = '5493764000000'; // 549 + área + número (sin + ni 0)
     const ADDRESS = 'Calle 123, Ciudad, Misiones';
@@ -93,14 +89,9 @@
   <!-- HERO (full-bleed) -->
   <header class="relative w-full">
     <div class="relative w-full h-[68vh] md:h-[80vh]">
-      <!-- 👇 Reemplazá este bloque por una foto real: podés usar style=\"background-image:url('assets/hero.jpg')\" o un <img/> -->
+      <!-- ✅ HERO con imagen real -->
       <div class="absolute inset-0">
-        <div class="w-full h-full bg-slate-900 grid place-content-center text-white/80">
-          <div class="text-center">
-            <div class="text-6xl mb-3" aria-hidden>🏨</div>
-            <p>HERO full‑width — reemplazá por tu imagen/slider</p>
-          </div>
-        </div>
+        <img src="img/hero-hotel.png" alt="Fachada del alojamiento (imagen de muestra)" class="w-full h-full object-cover">
       </div>
       <!-- Overlay para contraste sobre la foto -->
       <div class="absolute inset-0 bg-black/35"></div>
@@ -122,14 +113,14 @@
     </div>
   </header>
 
-  <!-- HABITACIONES (DETALLADAS) --> (DETALLADAS) -->
+  <!-- HABITACIONES (DETALLADAS) -->
   <section id="habitaciones" class="max-w-6xl mx-auto px-4 py-12">
     <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Habitaciones</h2>
     <p class="mt-2 text-slate-700">Detalle con equipamiento y precio orientativo. Duplicá o quitá tarjetas según necesidad.</p>
     <div class="mt-6 grid md:grid-cols-3 gap-4">
-      <!-- Room Card -->
+      <!-- Standard -->
       <article class="rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm">
-        <div class="aspect-video bg-slate-100 grid place-content-center text-slate-500" role="img" aria-label="Foto habitación Standard">Foto Standard</div>
+        <img src="img/habitaciones-hotel.png" alt="Habitación Standard (imagen de muestra)" class="w-full aspect-video object-cover bg-slate-100">
         <div class="p-4">
           <h3 class="font-bold">Standard</h3>
           <ul class="mt-1 text-sm text-slate-600 list-disc list-inside">
@@ -143,9 +134,9 @@
           </div>
         </div>
       </article>
-      <!-- Room Card -->
+      <!-- Superior -->
       <article class="rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm">
-        <div class="aspect-video bg-slate-100 grid place-content-center text-slate-500" role="img" aria-label="Foto habitación Superior">Foto Superior</div>
+        <img src="img/habitaciones-hotel.png" alt="Habitación Superior (imagen de muestra)" class="w-full aspect-video object-cover bg-slate-100">
         <div class="p-4">
           <h3 class="font-bold">Superior</h3>
           <ul class="mt-1 text-sm text-slate-600 list-disc list-inside">
@@ -159,9 +150,9 @@
           </div>
         </div>
       </article>
-      <!-- Room Card -->
+      <!-- Suite -->
       <article class="rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm">
-        <div class="aspect-video bg-slate-100 grid place-content-center text-slate-500" role="img" aria-label="Foto habitación Suite">Foto Suite</div>
+        <img src="img/habitaciones-hotel.png" alt="Habitación Suite (imagen de muestra)" class="w-full aspect-video object-cover bg-slate-100">
         <div class="p-4">
           <h3 class="font-bold">Suite</h3>
           <ul class="mt-1 text-sm text-slate-600 list-disc list-inside">
@@ -186,20 +177,103 @@
       <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>🍽️</span><p class="font-bold mt-1">Desayuno regional</p><p class="text-sm text-slate-600">Opciones sin TACC y vegetarianas.</p></div>
       <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>🏊‍♂️</span><p class="font-bold mt-1">Piscina</p><p class="text-sm text-slate-600">Solárium y toallas incluidas.</p></div>
       <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>🚗</span><p class="font-bold mt-1">Estacionamiento</p><p class="text-sm text-slate-600">Cochera cubierta sujeta a disponibilidad.</p></div>
-      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>📶</span><p class="font-bold mt-1">Wi‑Fi de alta velocidad</p><p class="text-sm text-slate-600">Ideal para trabajo remoto.</p></div>
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>📶</span><p class="font-bold mt-1">Wi-Fi de alta velocidad</p><p class="text-sm text-slate-600">Ideal para trabajo remoto.</p></div>
       <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>🧺</span><p class="font-bold mt-1">Lavandería</p><p class="text-sm text-slate-600">Servicio con cargo.</p></div>
-      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>🐾</span><p class="font-bold mt-1">Pet‑friendly</p><p class="text-sm text-slate-600">Consultar reglas y cupos.</p></div>
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><span class="text-2xl" aria-hidden>🐾</span><p class="font-bold mt-1">Pet-friendly</p><p class="text-sm text-slate-600">Consultar reglas y cupos.</p></div>
     </div>
   </section>
 
-  <!-- GALERÍA -->
-  <section id="galeria" class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Galería</h2>
-    <p class="mt-2 text-slate-700">Reemplazá por tus fotos (10–15 recomendado).</p>
-    <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
-      <!-- 12 placeholders -->
-      ${Array.from({length:12}).map((_,i)=>`<div class='aspect-square bg-slate-100 grid place-content-center text-slate-500'>Foto ${i+1}</div>`).join('')}
+  <!-- GALERÍA (CARRUSEL FULL-WIDTH) -->
+  <section id="galeria" class="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-12 bg-white">
+    <style>
+      .no-scrollbar::-webkit-scrollbar{display:none}
+      .no-scrollbar{scrollbar-width:none}
+    </style>
+
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Galería</h2>
+      <p class="mt-2 text-slate-700">Deslizá para ver más fotos (flechas, dots o swipe en móvil).</p>
     </div>
+
+    <div class="relative mt-4">
+      <button class="gal-prev absolute left-3 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-slate-900/70 text-white border border-white/20 backdrop-blur hover:bg-slate-900/90" aria-label="Foto anterior">‹</button>
+      <button class="gal-next absolute right-3 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full bg-slate-900/70 text-white border border-white/20 backdrop-blur hover:bg-slate-900/90" aria-label="Foto siguiente">›</button>
+
+      <div class="gal-track no-scrollbar snap-x snap-mandatory scroll-smooth overflow-x-auto w-full">
+        <figure class="min-w-full snap-start">
+          <img src="img/galeria-01.jpg" alt="Habitación y balcón con vista verde" class="w-full aspect-[16/9] object-cover bg-slate-100" fetchpriority="high" decoding="async">
+        </figure>
+        <figure class="min-w-full snap-start">
+          <img loading="lazy" src="img/galeria-02.jpg" alt="Área de piscina iluminada al atardecer" class="w-full aspect-[16/9] object-cover bg-slate-100">
+        </figure>
+        <figure class="min-w-full snap-start">
+          <img loading="lazy" src="img/galeria-03.jpg" alt="Lobby moderno con detalles en madera" class="w-full aspect-[16/9] object-cover bg-slate-100">
+        </figure>
+        <figure class="min-w-full snap-start">
+          <img loading="lazy" src="img/galeria-04.jpg" alt="Desayunador con grandes ventanales" class="w-full aspect-[16/9] object-cover bg-slate-100">
+        </figure>
+      </div>
+
+      <div class="gal-dots flex items-center justify-center gap-2 mt-3" aria-label="Paginación del carrusel"></div>
+    </div>
+
+    <script>
+      (function(){
+        const root = document.getElementById('galeria');
+        const track = root.querySelector('.gal-track');
+        const slides = [...track.querySelectorAll('figure')];
+        const prev = root.querySelector('.gal-prev');
+        const next = root.querySelector('.gal-next');
+        const dots = root.querySelector('.gal-dots');
+        let idx = 0;
+
+        function buildDots(){
+          dots.innerHTML = '';
+          slides.forEach((_, i)=>{
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'w-2.5 h-2.5 rounded-full bg-slate-500/70 border border-slate-300';
+            b.setAttribute('aria-label', 'Ir a la foto ' + (i+1));
+            b.addEventListener('click', ()=>go(i));
+            dots.appendChild(b);
+          });
+        }
+        function updateDots(){
+          [...dots.children].forEach((el, i)=>{
+            el.setAttribute('aria-current', i===idx ? 'true':'false');
+            el.classList.toggle('bg-slate-200', i===idx);
+            el.classList.toggle('bg-slate-500/70', i!==idx);
+          });
+        }
+
+        function go(n){
+          idx = (n + slides.length) % slides.length;
+          const x = slides[idx].offsetLeft;
+          track.scrollTo({left:x, behavior:'smooth'});
+          updateDots();
+        }
+
+        prev.addEventListener('click', ()=>go(idx-1));
+        next.addEventListener('click', ()=>go(idx+1));
+
+        root.addEventListener('keydown', (e)=>{
+          if(e.key === 'ArrowLeft') go(idx-1);
+          if(e.key === 'ArrowRight') go(idx+1);
+        });
+        root.tabIndex = 0;
+
+        let startX = 0; let tracking = false;
+        track.addEventListener('pointerdown', e=>{ tracking=true; startX=e.clientX; track.setPointerCapture(e.pointerId); });
+        track.addEventListener('pointerup', e=>{
+          if(!tracking) return; tracking=false;
+          const dx = e.clientX - startX;
+          if(Math.abs(dx) > 40) (dx<0 ? go(idx+1) : go(idx-1));
+        });
+
+        buildDots(); updateDots(); go(0);
+        window.addEventListener('resize', ()=>go(idx));
+      })();
+    </script>
   </section>
 
   <!-- ATRACCIONES CERCANAS -->
@@ -238,11 +312,11 @@
 
     <form onsubmit="sendWhatsAppReserva(event)" class="mt-6 grid md:grid-cols-6 gap-3 p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
       <div class="md:col-span-2">
-        <label for="checkin" class="text-sm text-slate-600">Check‑in</label>
+        <label for="checkin" class="text-sm text-slate-600">Check-in</label>
         <input id="checkin" type="date" class="mt-1 w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-300" />
       </div>
       <div class="md:col-span-2">
-        <label for="checkout" class="text-sm text-slate-600">Check‑out</label>
+        <label for="checkout" class="text-sm text-slate-600">Check-out</label>
         <input id="checkout" type="date" class="mt-1 w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-300" />
       </div>
       <div>
@@ -263,7 +337,7 @@
   <section id="faq" class="max-w-6xl mx-auto px-4 py-12">
     <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Preguntas frecuentes</h2>
     <div class="mt-6 grid md:grid-cols-2 gap-4">
-      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">¿Check‑in y check‑out?</p><p class="text-sm text-slate-600 mt-1">Check‑in 14:00 • Check‑out 10:00 (DEMO).</p></div>
+      <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">¿Check-in y check-out?</p><p class="text-sm text-slate-600 mt-1">Check-in 14:00 • Check-out 10:00 (DEMO).</p></div>
       <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">¿Política de cancelación?</p><p class="text-sm text-slate-600 mt-1">Cancelación flexible (consultar condiciones).</p></div>
       <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">¿Estacionamiento?</p><p class="text-sm text-slate-600 mt-1">Incluido, sujeto a disponibilidad.</p></div>
       <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm"><p class="font-semibold">¿Aceptan mascotas?</p><p class="text-sm text-slate-600 mt-1">Sí, con costo adicional (DEMO).</p></div>
@@ -315,7 +389,6 @@
   </footer>
 
   <script>
-    // Mostrar número en el panel de contacto
     document.getElementById('wa_display').textContent = WHATSAPP_NUMBER;
   </script>
 </body>
