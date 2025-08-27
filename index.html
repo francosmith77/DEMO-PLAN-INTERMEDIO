@@ -193,12 +193,53 @@
   </section>
 
   <!-- GALERÍA -->
-  <section id="galeria" class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Galería</h2>
-    <p class="mt-2 text-slate-700">Reemplazá por tus fotos (10–15 recomendado).</p>
-    <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
-      <!-- 12 placeholders -->
-      ${Array.from({length:12}).map((_,i)=>`<div class='aspect-square bg-slate-100 grid place-content-center text-slate-500'>Foto ${i+1}</div>`).join('')}
+  <section id="galeria" class="py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Galería</h2>
+      <p class="mt-2 text-slate-700">Reemplazá por tus fotos (10–15 recomendado).</p>
+    </div>
+    <div id="galleryCarousel" class="relative mt-6" aria-label="Galería" aria-roledescription="carousel" tabindex="0">
+      <div class="overflow-hidden">
+        <ul id="galleryTrack" class="flex transition-transform duration-500" aria-live="polite">
+          <li class="w-full flex-shrink-0" role="group" aria-label="1 de 10">
+            <img src="img/galeria-01.jpg" alt="Galería 1" class="w-full h-64 md:h-[32rem] object-cover" loading="lazy" />
+          </li>
+          <li class="w-full flex-shrink-0" role="group" aria-label="2 de 10" aria-hidden="true">
+            <img src="img/galeria-02.jpg" alt="Galería 2" class="w-full h-64 md:h-[32rem] object-cover" loading="lazy" />
+          </li>
+          <li class="w-full flex-shrink-0" role="group" aria-label="3 de 10" aria-hidden="true">
+            <img src="img/galeria-03.jpg" alt="Galería 3" class="w-full h-64 md:h-[32rem] object-cover" loading="lazy" />
+          </li>
+          <li class="w-full flex-shrink-0" role="group" aria-label="4 de 10" aria-hidden="true">
+            <img src="img/galeria-04.jpg" alt="Galería 4" class="w-full h-64 md:h-[32rem] object-cover" loading="lazy" />
+          </li>
+          <li class="w-full flex-shrink-0" role="group" aria-label="5 de 10" aria-hidden="true">
+            <img src="img/galeria-05.jpg" alt="Galería 5" class="w-full h-64 md:h-[32rem] object-cover" loading="lazy" />
+          </li>
+          <li class="w-full flex-shrink-0" role="group" aria-label="6 de 10" aria-hidden="true">
+            <img src="img/galeria-06.jpg" alt="Galería 6" class="w-full h-64 md:h-[32rem] object-cover" loading="lazy" />
+          </li>
+          <li class="w-full flex-shrink-0" role="group" aria-label="7 de 10" aria-hidden="true">
+            <img src="img/galeria-07.jpg" alt="Galería 7" class="w-full h-64 md:h-[32rem] object-cover" loading="lazy" />
+          </li>
+          <li class="w-full flex-shrink-0" role="group" aria-label="8 de 10" aria-hidden="true">
+            <img src="img/galeria-08.jpg" alt="Galería 8" class="w-full h-64 md:h-[32rem] object-cover" loading="lazy" />
+          </li>
+          <li class="w-full flex-shrink-0" role="group" aria-label="9 de 10" aria-hidden="true">
+            <img src="img/galeria-09.jpg" alt="Galería 9" class="w-full h-64 md:h-[32rem] object-cover" loading="lazy" />
+          </li>
+          <li class="w-full flex-shrink-0" role="group" aria-label="10 de 10" aria-hidden="true">
+            <img src="img/galeria-10.jpg" alt="Galería 10" class="w-full h-64 md:h-[32rem] object-cover" loading="lazy" />
+          </li>
+        </ul>
+      </div>
+      <button id="galleryPrev" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-emerald-300" aria-label="Anterior">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button id="galleryNext" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-emerald-300" aria-label="Siguiente">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <div id="galleryDots" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2" role="tablist"></div>
     </div>
   </section>
 
@@ -313,6 +354,64 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Carrusel de galería
+    (function(){
+      const track = document.getElementById('galleryTrack');
+      if(!track) return;
+      const slides = Array.from(track.children);
+      const prev = document.getElementById('galleryPrev');
+      const next = document.getElementById('galleryNext');
+      const dots = document.getElementById('galleryDots');
+      const carousel = document.getElementById('galleryCarousel');
+      let index = 0;
+
+      slides.forEach((_, i)=>{
+        const btn = document.createElement('button');
+        btn.className = 'w-3 h-3 rounded-full bg-white/50 focus:outline-none focus:ring-2 focus:ring-emerald-300';
+        btn.setAttribute('aria-label', `Ir a imagen ${i+1}`);
+        btn.setAttribute('role', 'tab');
+        btn.addEventListener('click', ()=>goTo(i));
+        dots.appendChild(btn);
+      });
+
+      function update(){
+        track.style.transform = `translateX(-${index*100}%)`;
+        Array.from(dots.children).forEach((dot, i)=>{
+          dot.classList.toggle('bg-white', i===index);
+          dot.classList.toggle('bg-white/50', i!==index);
+          dot.setAttribute('aria-selected', i===index);
+        });
+        slides.forEach((slide, i)=>{
+          slide.setAttribute('aria-hidden', i!==index);
+        });
+      }
+
+      function goTo(i){
+        index = (i + slides.length) % slides.length;
+        update();
+      }
+
+      prev.addEventListener('click', ()=>goTo(index-1));
+      next.addEventListener('click', ()=>goTo(index+1));
+
+      carousel.addEventListener('keydown', e=>{
+        if(e.key === 'ArrowLeft') goTo(index-1);
+        if(e.key === 'ArrowRight') goTo(index+1);
+      });
+
+      let startX = 0;
+      track.addEventListener('touchstart', e=>{ startX = e.touches[0].clientX; }, {passive:true});
+      track.addEventListener('touchend', e=>{
+        const endX = e.changedTouches[0].clientX;
+        if(endX - startX > 50) goTo(index-1);
+        if(startX - endX > 50) goTo(index+1);
+      });
+
+      update();
+    })();
+  </script>
 
   <script>
     // Mostrar número en el panel de contacto
